@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create order</title>
+</head>
+<body>
+    <h1>Create order</h1>
+    {% if errormessage %}
+        <h3>{{ errormessage }}</h3>
+    {% endif %}
+    <form class="form" action="/orderForm" method="post">
+        <h3><label for="customerId">Customer ID:</label></h3>
+        <select name="customerId" id="customerId">
+            {% for customer in customers %}
+                <option value="{{ customer.customerId }}">{{ customer.customerId }} - {{ customer.customerName }}</option>
+            {% endfor %}
+        </select>
+
+        <h3><label for="orderDate">Order date:</label></h3>
+        <input type="text" id="orderDate" name="orderDate" value="{{orderDate}}">
+
+        </br></br>
+        <button id="submit">Submit</button>
+    </form>
+
+</body>
+</html>

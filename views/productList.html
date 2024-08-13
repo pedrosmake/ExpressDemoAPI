@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products list</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <table>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        {% for product in products | sort (attribute=productId) %}
+        <tr>
+            <td><a href="/products/{{product.productId}}" target="_blank">{{product.productId}}</a></td>
+            <td>{{product.productName}}</td>
+            <td>{{product.productPrice}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers list</title>
+</head>
+<body>
+    <h1>Customers</h1>
+    <table>
+        <tr>
+            <th>Customer ID</th>
+            <th>Name</th>
+        </tr>
+        {% for customer in customers | sort (attribute=customerId) %}
+        <tr>
+            <td><a href="/customers/{{customer.customerId}}" target="_blank">{{customer.customerId}}</a></td>
+            <td>{{customer.customerName}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

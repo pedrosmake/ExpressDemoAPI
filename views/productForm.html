@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create product</title>
+</head>
+<body>
+    <h1>Create product</h1>
+    {% if errormessage %}
+        <h3>{{ errormessage }}</h3>
+    {% endif %}
+    <form class="form" action="/productForm" method="post">
+        <h3><label for="name">Name:</label></h3>
+        <input type="text" id="name" name="name" value="{{name}}" >
+
+        <h3><label for="description">Description:</label></h3>
+        <input type="text" id="description" name="description" value="{{description}}" >
+
+        <h3><label for="price">Price:</label></h3>
+        <input type="text" name="price" id="price" value="{{price}}" >
+
+        </br></br>
+        <button id="submit">Submit</button>
+    </form>
+</body>
+</html>
