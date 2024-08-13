@@ -7,6 +7,8 @@ import bodyParser from "body-parser";
 import { getAllCustomers } from "./controllers/CustomerController";
 import session from "express-session";
 import { getLoginForm, getRegisterForm, postLoginForm, postRegisterForm } from "./controllers/AuthController";
+import { allowRoles } from "./middleware/AuthMiddleware";
+import { UserRole } from "./models/JwtToken";
 
 const app = express();
 
@@ -37,18 +39,18 @@ app.get("/", async (req: express.Request, res: express.Response) => {
     res.render('index.html', {names});
 });
 
-app.get("/customers", getAllCustomers);
-app.get("/orders", getAllOrders);
-app.get("/orders/:id", getSingleOrder);
-app.get("/products", getAllProducts);
-app.get("/products/:id", getSingleProduct);
+app.get("/customers", allowRoles([UserRole.Admin, UserRole.User]), getAllCustomers);
+app.get("/orders", allowRoles([UserRole.Admin, UserRole.User]), getAllOrders);
+app.get("/orders/:id", allowRoles([UserRole.Admin, UserRole.User]), getSingleOrder);
+app.get("/products", allowRoles([UserRole.Admin, UserRole.User]), getAllProducts);
+app.get("/products/:id", allowRoles([UserRole.Admin, UserRole.User]), getSingleProduct);
 
-app.get("/productForm", getProductForm);
-app.post("/productForm", postProductForm);
+app.get("/productForm", allowRoles([UserRole.Admin]), getProductForm);
+app.post("/productForm", allowRoles([UserRole.Admin]), postProductForm);
 
 // client 1-2, date 2024-08-12 13:02:41
-app.get("/orderForm", getOrderForm);
-app.post("/orderForm", postOrderForm);
+app.get("/orderForm", allowRoles([UserRole.Admin, UserRole.User]), getOrderForm);
+app.post("/orderForm", allowRoles([UserRole.Admin, UserRole.User]), postOrderForm);
 
 app.get("/loginForm", getLoginForm);
 app.post("/loginForm", postLoginForm);

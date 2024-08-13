@@ -2,10 +2,11 @@ import axios, {AxiosResponse} from "axios";
 import { OrderResponse } from "../models/OrderResponse";
 import { Order } from "../models/Order";
 import { OrderRequest } from "../models/OrderRequest";
+import { getHeader } from "./AuthUtil";
 
-export const getOrders = async (): Promise<OrderResponse[]> => {
+export const getOrders = async (token: String): Promise<OrderResponse[]> => {
     try {
-        const response: AxiosResponse = await axios.get("http://localhost:8080/api/orders");
+        const response: AxiosResponse = await axios.get("http://localhost:8080/api/orders", getHeader(token));
         return response.data;
     } catch (e) {
         console.log(e);
@@ -13,9 +14,9 @@ export const getOrders = async (): Promise<OrderResponse[]> => {
     }
 }
 
-export const getOrderById = async (id: String): Promise<Order> => {
+export const getOrderById = async (id: String, token: String): Promise<Order> => {
     try {
-        const response: AxiosResponse = await axios.get("http://localhost:8080/api/orders/" + id);
+        const response: AxiosResponse = await axios.get("http://localhost:8080/api/orders/" + id, getHeader(token));
         return response.data;
     } catch (e) {
         console.log(e);
@@ -23,9 +24,9 @@ export const getOrderById = async (id: String): Promise<Order> => {
     }
 }
 
-export const createOrder = async (order: OrderRequest): Promise<Number> => {
+export const createOrder = async (order: OrderRequest, token: String): Promise<Number> => {
     try {
-        const response: AxiosResponse = await axios.post("http://localhost:8080/api/orders", order);
+        const response: AxiosResponse = await axios.post("http://localhost:8080/api/orders", order, getHeader(token));
         return response.data;
     } catch (e) {
         console.log(e);
