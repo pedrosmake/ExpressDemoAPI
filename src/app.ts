@@ -6,7 +6,7 @@ import { getAllProducts, getProductForm, getSingleProduct, postProductForm } fro
 import bodyParser from "body-parser";
 import { getAllCustomers } from "./controllers/CustomerController";
 import session from "express-session";
-import { getLoginForm, postLoginForm } from "./controllers/AuthController";
+import { getLoginForm, getRegisterForm, postLoginForm, postRegisterForm } from "./controllers/AuthController";
 
 const app = express();
 
@@ -52,3 +52,6 @@ app.post("/orderForm", postOrderForm);
 
 app.get("/loginForm", getLoginForm);
 app.post("/loginForm", postLoginForm);
+
+app.get("/registerForm", getRegisterForm);
+app.post("/registerForm", postRegisterForm);
